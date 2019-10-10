@@ -1,5 +1,8 @@
 package com.company;
 
+import java.util.List;
+import java.util.Map;
+
 public interface Crud {
     void buildcar();
     void redactcar(String vin);
@@ -30,4 +33,6 @@ public interface Crud {
     void showByMileage(String mileagestart,String mileageend);
     void showByPrice(String pricestart,String priceend);
     void showByMarkModel(String mark,String model);
+
+    void mergeListHashSet(List<Car> list, Map<String,Car> hashset);
 }

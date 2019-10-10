@@ -875,5 +875,49 @@ public class CarBuilder extends CarTemp {
             item.print();
         }
     }
+//----------------------------------------------------------------------------------------------------------------------
+// метод слияния двух разных коллекций List и HashSet
+    @Override
+    public void mergeListHashSet(List<Car> listcars, Map<String,Car> hashmapcars) {
+
+
+        int confirm;
+        System.out.println("Are you sure you want merge List and HashSet? if yes type 1 if no type 0");
+        confirm=sc.nextInt();
+        if (confirm==1){
+//init
+            String year;
+            String yearHash;
+            int yearHashInt;
+            int ymax=0;
+//нахожу наибольший год в коллекции List
+            for (int i=0;i<listcars.size();i++){
+                year=listcars.get(i).getYear();
+                int y=Integer.valueOf(year);
+                if (ymax<y){
+                    ymax=y;
+                }
+            }
+//Перебор коллекции HashSet с целью найти авто с годом большим чем максимальный год из коллекции List. Добавление в список
+            List<Car>listcars1=new ArrayList<>();
+            for (Map.Entry<String, Car> item : hashmapcars.entrySet()) {
+                if (item.getValue() != null) {
+                    yearHash=item.getValue().getYear();
+                    yearHashInt=Integer.valueOf(yearHash);
+                    if (yearHashInt>ymax){
+                        listcars.add(item.getValue());
+                    }
+                }
+            }
+//Добавляю новый лист в базу
+            for (Car item : listcars) {
+                database.put(item.getVin(),item);
+            }
+            System.out.println("database merged and added to database");
+        }
+        else {
+            System.out.println("discard");
+        }
+    }
 }
 //----------------------------------------------------------------------------------------------------------------------

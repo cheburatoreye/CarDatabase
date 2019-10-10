@@ -1,11 +1,12 @@
 package com.company;
 
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
 
     public static void main(String[] args) {
-
+    //------------------------------------------------------------------------------------------------------------------
+        //Init
         int exit=1;
         int search=0;
         int yearstart;
@@ -26,27 +27,57 @@ public class Main {
         String price_stop;
         Scanner sc=new Scanner(System.in);
         Crud crud =new CarBuilder();
-        crud.createcar2("OEIHFUIUE945995","ВН4568ОУ","BMW","I3","123544","1985","red","sedan","500");
-        crud.createcar2("TGHEDSWIUE9434652","ВН5555ОУ","OPEL","ZAFIRA","100654","1989","GREE","sedan","800");
-        crud.createcar2("OCEDFUIUE947952","ВН3214ОУ","OPEL","VECTRA","122654","1989","blue","sedan","2000");
-        crud.createcar2("TLHLTKELW568345","ВН32456ОУ","TOYOTA","COROLLA","320214","1996","grey","sedan","3000");
-        crud.createcar2("JSJFGKELW216448","ВН8523ОУ","TOYOTA","COROLLA","300214","1995","grey","sedan","2000");
         Menu menu=new Menu();
 
+        //Stored database-----------------------------------------------------------------------------------------------
+        Map<String,Car>hashset=new HashMap<>();
+        Car car5=new Car("OEIHFUIUE945995","ВН4568ОУ","BMW","I3","123544","1985","red","sedan","500");
+        Car car6=new Car("TGHEDSWIUE9434652","ВН5555ОУ","OPEL","ZAFIRA","100654","1989","GREE","sedan","800");
+        Car car7=new Car("OCEDFUIUE947952","ВН3214ОУ","OPEL","VECTRA","122654","1989","blue","sedan","2000");
+        Car car8=new Car("TLHLTKELW568345","ВН32456ОУ","TOYOTA","COROLLA","320214","2019","grey","sedan","3000");
+        Car car9=new Car("JSJFGKELW216448","ВН8523ОУ","TOYOTA","COROLLA","300214","2019","grey","sedan","2000");
+        Car car10=new Car("TGOTGKGKELW215948","ВН8548ОУ","MAZDA","CX3","22132","2019","YELLOW","SEDAN","18000");
+        hashset.put("OEIHFUIUE945995",car5);
+        hashset.put("TGHEDSWIUE9434652",car6);
+        hashset.put("OCEDFUIUE947952",car7);
+        hashset.put("TLHLTKELW568345",car8);
+        hashset.put("JSJFGKELW216448",car9);
+        hashset.put("TGOTGKGKELW215948",car10);
+
+        //Stored database-----------------------------------------------------------------------------------------------
+
+        //--------------------------------------------------------------------------------------------------------------
+        List<Car>listcars=new ArrayList<>();
+        Car car1=new Car("OEIFIFJEUE9459343","ВН988ОУ","BMW","I3","1235234544","1995","red","sedan","1500");
+        Car car2=new Car("WDEFWSWSQJEUE94593","ВН7872ОУ","MAZDA","6","159234544","1998","black","sedan","1600");
+        Car car3=new Car("XAZDDFWW9459343","ВН7785ОУ","NIVA","2111","1242387554","2003","blue","sedan","1800");
+        Car car4=new Car("PLKIFJEUE5451943","ВН123ОУ","DAEWOO","LANOS","54124","2005","GREEN","sedan","3000");
+        listcars.add(car1);
+        listcars.add(car2);
+        listcars.add(car3);
+        listcars.add(car4);
+        //--------------------------------------------------------------------------------------------------------------
+        //Menu loop
         while (exit==1){
 
             switch (search){
+                //------------------------------------------------------------------------------------------------------
+                // Menu main
                 case 0:{
                     menu.setState(new MenuStart());
                     menu.printState();
                     search = sc.nextInt();
                     break;
                 }
+                //------------------------------------------------------------------------------------------------------
+                // Menu search
                 case 1:{
                     menu.setState(new MenuSearch());
                     menu.printState();
                     search = sc.nextInt();
                     switch (search){
+                        //----------------------------------------------------------------------------------------------
+                        // Menu search by VIN sub menu search
                         case 1:{
                             if (search==1){
                                 menu.next();
@@ -68,6 +99,8 @@ public class Main {
                             }
                             break;
                         }
+                        //----------------------------------------------------------------------------------------------
+                        // Menu search by NUMBER sub menu search
                         case 2:{
                                 System.out.println( "Enter car number for search or type 0 to go back .");
                                 number=sc.next();
@@ -77,6 +110,8 @@ public class Main {
                             search=1;
                             break;
                         }
+                        //----------------------------------------------------------------------------------------------
+                        // Menu search by MARK and MODEL sub menu search
                         case 3:{
                             do {
                                 System.out.println( " First enter car mark than type model for search or type 0 to go back .");
@@ -101,6 +136,8 @@ public class Main {
                             search=1;
                             break;
                         }
+                        //----------------------------------------------------------------------------------------------
+                        // Menu search by YEAR sub menu search
                         case 4:{
                             do {
                                 System.out.println( "Enter car year start searching than type end year or type 0 to go back .");
@@ -127,6 +164,8 @@ public class Main {
                             search=1;
                             break;
                         }
+                        //----------------------------------------------------------------------------------------------
+                        // Menu search by MILEAGE sub menu search
                         case 5:{
                             do {
                                 System.out.println( "Enter car mileage start searching than type end mileage or type 0 to go back .");
@@ -153,6 +192,8 @@ public class Main {
                             search=1;
                             break;
                         }
+                        //----------------------------------------------------------------------------------------------
+                        // Menu search by PRICE sub menu search
                         case 6:{
                             do {
                                 System.out.println( "Enter car price start searching than type end price or type 0 to go back .");
@@ -180,12 +221,16 @@ public class Main {
                             search=1;
                             break;
                         }
+                        //----------------------------------------------------------------------------------------------
+                        // Menu search ALL sub menu search
                         case 7:{
                             System.out.println( "The list of the cars in database: ");
                             crud.showAll();
                             search=1;
                             break;
                         }
+                        //----------------------------------------------------------------------------------------------
+                        // Menu search by MARK sub menu search
                         case 8:{
                             do {
                                 System.out.println( " First enter car mark for search or type 0 to go back .");
@@ -200,7 +245,7 @@ public class Main {
                                         search=sc.nextInt();
                                         if (search==1){ System.out.println("searching...");
                                             crud.showByMark(mark);
-                                            System.out.println("car not found.");}
+                                        }
                                     }
                                 }
                                 else{search=0;mark="0";model="0";}
@@ -208,9 +253,12 @@ public class Main {
                             search=1;
                             break;
                         }
+                        //----------------------------------------------------------------------------------------------
                     }
                     break;
                 }
+                //------------------------------------------------------------------------------------------------------
+                // Menu adding
                 case 2:{
                     menu.setState(new MenuAddingCars());
                     menu.printState();
@@ -218,6 +266,8 @@ public class Main {
                     search=0;
                     break;
                 }
+                //------------------------------------------------------------------------------------------------------
+                // Menu redact
                 case 3:{
                     menu.setState(new MenuRedacting());
                     menu.printState();
@@ -231,6 +281,8 @@ public class Main {
                     search=0;
                     break;
                 }
+                //------------------------------------------------------------------------------------------------------
+                // Menu deleting
                 case 4:{
                     menu.setState(new MenuDeleting());
                     menu.printState();
@@ -369,11 +421,22 @@ public class Main {
                             }
                     break;
                 }
+                //------------------------------------------------------------------------------------------------------
+                // Menu merge
+                case 5:{
+                    menu.setState(new MenuMerge());
+                    menu.printState();
+                    crud.mergeListHashSet(listcars,hashset);
+                    search=0;
+                    break;}
+                //------------------------------------------------------------------------------------------------------
+                // Menu exit
                 case -1:{
                     exit = 0;
                     System.out.println("Goodbye see you :)");
                     break;
                 }
+                //------------------------------------------------------------------------------------------------------
             }
         }
     }

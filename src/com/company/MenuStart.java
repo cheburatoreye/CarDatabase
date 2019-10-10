@@ -22,6 +22,7 @@ public class MenuStart implements  MenuState {
         System.out.println("2-add to database new car");
         System.out.println("3-redact car data through VIN");
         System.out.println("4-delete car from database using VIN");
+        System.out.println("5-merge list and car map");
         System.out.println("0-back");
         System.out.println("-1-exit");
         System.out.println("make your chose: ");
